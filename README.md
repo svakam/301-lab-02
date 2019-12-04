@@ -4,10 +4,10 @@ This lab focuses on jQuery and events in JavaScript.
 
 # Time estimate
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 3 hours
 
-Start time: _____
+Start time: 9:15am
 
-Finish time: _____
+Finish time: 12:15am
 
 Actual time needed to complete: _____
