@@ -8,8 +8,6 @@ const animalsArray = [];
 
 const keywords = [];
 
-animalsArray.forEach()
-
 // constructor for the animal
 function Animals(animalObj) {
   this.title = animalObj.title;
@@ -24,6 +22,7 @@ function Animals(animalObj) {
 // render the object
 Animals.prototype.render = function () {
 
+  // render animals on first load
   // get the template
   const photoTemplate = $('#photo-template').html();
 
@@ -47,13 +46,24 @@ Animals.prototype.render = function () {
   $('main').append($newSection);
 
 
-
-  // make a new option
-  let $newOption = $(`<option value='${this.keyword}'>${this.keyword}</option>`);
-
-  $('#dropdown').append($newOption);
+  // populate dropdown menu only if keyword is not already present in it
+  dropDownMenu(this.keyword);
 
 };
+
+function dropDownMenu(keyword) {
+  if (!keywords.includes(keyword)) {
+    keywords.push(keyword);
+
+    // make a new option and add keyword
+    let $newOption = $(`<option value='${keyword}'>${keyword}</option>`);
+
+    $('#dropdown').append($newOption);
+
+    console.log(keyword);
+    console.log($newOption);
+  }
+}
 
 // getting the data and making a new animal object
 $.get('./data/page-1.json', function (animal) {
