@@ -6,6 +6,10 @@
 
 const animalsArray = [];
 
+const keywords = [];
+
+animalsArray.forEach()
+
 // constructor for the animal
 function Animals(animalObj) {
   this.title = animalObj.title;
@@ -21,13 +25,13 @@ function Animals(animalObj) {
 Animals.prototype.render = function () {
 
   // get the template
-  const myTemplate = $('#photo-template').html();
+  const photoTemplate = $('#photo-template').html();
 
   // make a new section
   const $newSection = $('<section></section>');
 
   // set newsection's html content to the template
-  $newSection.html(myTemplate);
+  $newSection.html(photoTemplate);
 
   // put the title into the section
   $newSection.find('h2').text(this.title);
@@ -41,6 +45,14 @@ Animals.prototype.render = function () {
 
   // append newsection to parent (main)
   $('main').append($newSection);
+
+
+
+  // make a new option
+  let $newOption = $(`<option value='${this.keyword}'>${this.keyword}</option>`);
+
+  $('#dropdown').append($newOption);
+
 };
 
 // getting the data and making a new animal object
@@ -49,3 +61,4 @@ $.get('./data/page-1.json', function (animal) {
     new Animals(animal[i]).render();
   }
 });
+
