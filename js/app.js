@@ -38,6 +38,7 @@ Animals.prototype.render = function () {
   // put the image into the section
   $newSection.find('img').attr('src', this.image_url);
   $newSection.find('img').attr('alt', this.title);
+  $newSection.attr('class', 'animal');
 
   // put description into section
   $newSection.find('p').text(this.description);
@@ -46,8 +47,28 @@ Animals.prototype.render = function () {
   $('main').append($newSection);
 };
 
-function filterAnimals(choice) {
-  console.log(choice);
+function filterAnimals(animals) {
+  // if a choice is clicked (choice contains keyword),
+  // make note of keyword
+  // hide everything and show the images with the keyword that was clicked on
+  $('#dropdown').on('change', () => {
+    $('.animal').hide();
+    // console.log($('#dropdown option[value]'));
+    console.log($('#dropdown option'));
+    console.log($('#dropdown option').length);
+    for (let i = 0; i < $('#dropdown option').length; i++) {
+      console.log($('#dropdown option')[i]);
+      console.log($('#dropdown option')[i].value);
+
+      // animals.forEach(animal => {
+      //   console.log(animal);
+      // });
+    }
+  });
+
+  // $('#dropdown').on('change', () => {
+  //   console.log($(`option[value=${keywords}]`));
+  // });
 }
 
 function dropDownMenu(animal) {
@@ -58,12 +79,6 @@ function dropDownMenu(animal) {
     let $newOption = $(`<option value='${animal.keyword}'>${animal.keyword}</option>`);
 
     $('#dropdown').append($newOption);
-
-    $('#dropdown').on('click', () => {
-      console.log('hi');
-    });
-
-    filterAnimals($newOption);
   }
 }
 
@@ -72,6 +87,10 @@ $.get('./data/page-1.json', animals => {
   animals.forEach(animal => {
     new Animals(animal).render();
     dropDownMenu(animal);
+    filterAnimals(animal);
   });
 });
 
+$.get('./data/page-1.json', animals => {
+  filterAnimals(animals);
+});
