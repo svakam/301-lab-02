@@ -44,31 +44,34 @@ Animals.prototype.render = function () {
 
   // append newsection to parent (main)
   $('main').append($newSection);
-
-
-  // populate dropdown menu only if keyword is not already present in it
-  dropDownMenu(this.keyword);
-
 };
 
-function dropDownMenu(keyword) {
-  if (!keywords.includes(keyword)) {
-    keywords.push(keyword);
+function filterAnimals(choice) {
+  console.log(choice);
+}
+
+function dropDownMenu(animal) {
+  if (!keywords.includes(animal.keyword)) {
+    keywords.push(animal.keyword);
 
     // make a new option and add keyword
-    let $newOption = $(`<option value='${keyword}'>${keyword}</option>`);
+    let $newOption = $(`<option value='${animal.keyword}'>${animal.keyword}</option>`);
 
     $('#dropdown').append($newOption);
 
-    console.log(keyword);
-    console.log($newOption);
+    $('#dropdown').on('click', () => {
+      console.log('hi');
+    });
+
+    filterAnimals($newOption);
   }
 }
 
 // getting the data and making a new animal object
-$.get('./data/page-1.json', function (animal) {
-  for (let i = 0; i < animal.length; i++) {
-    new Animals(animal[i]).render();
-  }
+$.get('./data/page-1.json', animals => {
+  animals.forEach(animal => {
+    new Animals(animal).render();
+    dropDownMenu(animal);
+  });
 });
 
