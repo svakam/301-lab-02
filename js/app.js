@@ -38,37 +38,59 @@ Animals.prototype.render = function () {
   // put the image into the section
   $newSection.find('img').attr('src', this.image_url);
   $newSection.find('img').attr('alt', this.title);
+  $newSection.attr('class', 'animal');
 
   // put description into section
   $newSection.find('p').text(this.description);
 
   // append newsection to parent (main)
   $('main').append($newSection);
-
-
-  // populate dropdown menu only if keyword is not already present in it
-  dropDownMenu(this.keyword);
-
 };
 
-function dropDownMenu(keyword) {
-  if (!keywords.includes(keyword)) {
-    keywords.push(keyword);
+function filterAnimals(animals) {
+  // if a choice is clicked (choice contains keyword),
+  // make note of keyword
+  // hide everything and show the images with the keyword that was clicked on
+  $('#dropdown').on('change', () => {
+    $('.animal').hide();
+    // console.log($('#dropdown option[value]'));
+    console.log($('#dropdown option'));
+    console.log($('#dropdown option').length);
+    for (let i = 0; i < $('#dropdown option').length; i++) {
+      console.log($('#dropdown option')[i]);
+      console.log($('#dropdown option')[i].value);
+
+      // animals.forEach(animal => {
+      //   console.log(animal);
+      // });
+    }
+  });
+
+  // $('#dropdown').on('change', () => {
+  //   console.log($(`option[value=${keywords}]`));
+  // });
+}
+
+function dropDownMenu(animal) {
+  if (!keywords.includes(animal.keyword)) {
+    keywords.push(animal.keyword);
 
     // make a new option and add keyword
-    let $newOption = $(`<option value='${keyword}'>${keyword}</option>`);
+    let $newOption = $(`<option value='${animal.keyword}'>${animal.keyword}</option>`);
 
     $('#dropdown').append($newOption);
-
-    console.log(keyword);
-    console.log($newOption);
   }
 }
 
 // getting the data and making a new animal object
-$.get('./data/page-1.json', function (animal) {
-  for (let i = 0; i < animal.length; i++) {
-    new Animals(animal[i]).render();
-  }
+$.get('./data/page-1.json', animals => {
+  animals.forEach(animal => {
+    new Animals(animal).render();
+    dropDownMenu(animal);
+    filterAnimals(animal);
+  });
 });
 
+$.get('./data/page-1.json', animals => {
+  filterAnimals(animals);
+});
