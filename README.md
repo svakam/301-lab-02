@@ -22,14 +22,14 @@ Start time: 10:10am
 
 Finish time: 12:10am
 
-Actual time needed to complete: ______
+Actual time needed to complete: 5 hours
 
 Feature 3: 
 
-Estimate of time needed to complete: ________
+Estimate of time needed to complete: 1 hour
 
-Start time: _______
+Start time: 10:00pm
 
-Finish time: _______
+Finish time: 11:00pm
 
-Actual time needed to complete: ______
+Actual time needed to complete: 1 hour
