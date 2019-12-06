@@ -8,5 +8,7 @@ body {
 }
 
 footer {
+  clear: both;
   margin-top: 5%;
+  color: lightgreen;
 }
